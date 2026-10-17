@@ -233,11 +233,9 @@ loadTicker(); setInterval(loadTicker, 5000);
 (function heroScene(){
   const canvas = document.getElementById('heroCanvas');
   if(!canvas || typeof THREE === 'undefined') return;
-  if(window.innerWidth < 640) { /* still render, but lighter particle count handled below */ }
 
   const wrap = canvas.parentElement;
   let W = wrap.clientWidth, H = wrap.clientHeight;
-  const isSmall = window.innerWidth < 640;
 
   const scene = new THREE.Scene();
   scene.fog = new THREE.FogExp2(0xEEF5FF, 0.022);
@@ -249,7 +247,7 @@ loadTicker(); setInterval(loadTicker, 5000);
   const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:true });
   let visible = true;
   new IntersectionObserver(([e])=> visible = e.isIntersecting).observe(canvas);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, isSmall ? 1.5 : 2));
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2.5));
   renderer.setSize(W, H);
 
   // Lighting
@@ -265,7 +263,7 @@ loadTicker(); setInterval(loadTicker, 5000);
   const group = new THREE.Group();
   scene.add(group);
 
-  const COUNT = isSmall ? 16 : 26;
+  const COUNT = 26;
   const SPACING = 1.35;
   const bars = [];
 
@@ -302,7 +300,7 @@ loadTicker(); setInterval(loadTicker, 5000);
   scene.add(gridHelper);
 
   // Floating particles (ambient depth)
-  const particleCount = isSmall ? 60 : 140;
+  const particleCount = 140;
   const particlesGeo = new THREE.BufferGeometry();
   const positions = new Float32Array(particleCount*3);
   for(let i=0;i<particleCount;i++){
@@ -340,11 +338,12 @@ loadTicker(); setInterval(loadTicker, 5000);
     requestAnimationFrame(animate);
     if(!visible) return;
     const t = clock.getElapsedTime();
+    if (window.__tilt) { mouseX = __tilt.x; mouseY = __tilt.y; }
 
     group.rotation.y = Math.sin(t*0.08) * 0.12 + mouseX * 0.35;
     group.position.y = -1.5 + mouseY * -0.6;
     camera.position.y = 7 + scrollFrac * 3;
-    camera.position.z = 22 - scrollFrac * 5;
+    camera.position.z = (W / H < 1 ? 31 : 22) - scrollFrac * 5;
     camera.lookAt(0, 2 - scrollFrac*1.5, 0);
 
     bars.forEach((b, i)=>{

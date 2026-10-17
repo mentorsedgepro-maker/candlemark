@@ -1,15 +1,23 @@
 (() => {
 if (typeof THREE === 'undefined') return;
 const RM = matchMedia('(prefers-reduced-motion: reduce)').matches, SM = innerWidth < 700;
-const mouse = { x: 0, y: 0 };
-addEventListener('pointermove', e => { mouse.x = e.clientX / innerWidth - .5; mouse.y = e.clientY / innerHeight - .5; });
+const mouse = { x: 0, y: 0 }, tilt = window.__tilt = { x: 0, y: 0 };
+const setM = (x, y) => { mouse.x = tilt.x = Math.max(-.5, Math.min(.5, x)); mouse.y = tilt.y = Math.max(-.5, Math.min(.5, y)); };
+addEventListener('pointermove', e => setM(e.clientX / innerWidth - .5, e.clientY / innerHeight - .5));
+if (matchMedia('(hover:none)').matches && typeof DeviceOrientationEvent !== 'undefined') {
+  const on = e => { if (e.gamma != null) setM(e.gamma / 60, (e.beta - 45) / 60); };
+  addEventListener('touchend', () => {
+    const D = DeviceOrientationEvent;
+    D.requestPermission ? D.requestPermission().then(s => s === 'granted' && addEventListener('deviceorientation', on)).catch(() => {}) : addEventListener('deviceorientation', on);
+  }, { once: true });
+}
 const B = 0x2272E6, L = 0x8FBDF5, D = 0x14378C;
 
 function stage(id, z = 14, fov = 45) {
   const c = document.getElementById(id); if (!c) return null;
   const w = c.parentElement, s = new THREE.Scene(), cam = new THREE.PerspectiveCamera(fov, 1, .1, 100);
   const r = new THREE.WebGLRenderer({ canvas: c, antialias: !SM, alpha: true });
-  r.setPixelRatio(Math.min(devicePixelRatio, SM ? 1.5 : 2));
+  r.setPixelRatio(Math.min(devicePixelRatio, 2.5));
   cam.position.z = z;
   s.add(new THREE.AmbientLight(0xCFE1FF, .8));
   const k = new THREE.PointLight(0xffffff, 1.4, 60); k.position.set(-6, 8, 10); s.add(k);
@@ -103,7 +111,7 @@ pull(); setInterval(pull, 5000);
 (() => {
   const g = stage('terrCanvas', 15, 50); if (!g) return;
   g.cam.position.set(0, 7, 15); g.cam.lookAt(0, 0, 0);
-  const geo = new THREE.PlaneGeometry(36, 22, SM ? 36 : 70, SM ? 24 : 44); geo.rotateX(-Math.PI / 2);
+  const geo = new THREE.PlaneGeometry(36, 22, SM ? 56 : 70, SM ? 36 : 44); geo.rotateX(-Math.PI / 2);
   g.s.add(new THREE.Mesh(geo, mat(B, .35)), new THREE.Points(geo, new THREE.PointsMaterial({ color: D, size: .07 })));
   const pos = geo.attributes.position;
   g.fns.push(t => {
@@ -127,7 +135,7 @@ pull(); setInterval(pull, 5000);
     m.position.x = (i - 1) * 3.2; g.s.add(m); return m;
   });
   let act = -1;
-  document.querySelectorAll('.tl-stack .tool-card').forEach((c, i) => { c.onmouseenter = () => act = i; c.onmouseleave = () => act = -1; });
+  document.querySelectorAll('.tl-stack .tool-card').forEach((c, i) => { c.onmouseenter = () => act = i; c.onmouseleave = () => act = -1; c.ontouchstart = () => act = i; });
   g.fns.push(t => S.forEach((m, i) => {
     m.rotation.y = t * .5 + i; m.rotation.x = t * .15 * (i + 1) + mouse.y;
     m.position.y = Math.sin(t + i * 2) * .4;
@@ -155,6 +163,7 @@ pull(); setInterval(pull, 5000);
     ray.setFromCamera(v, g.cam); const h = ray.intersectObjects(bars)[0];
     if (h) { const it = live.items[bars.indexOf(h.object)]; info.textContent = `${it.sym}  ${Number(it.price).toLocaleString(undefined, { maximumFractionDigits: 4 })}  ${it.chg >= 0 ? '▲' : '▼'} ${Math.abs(it.chg).toFixed(2)}%${it.closed ? ' · closed' : ''}`; }
   });
+  g.c.addEventListener('pointerdown', e => g.c.dispatchEvent(new PointerEvent('pointermove', e)));
   g.fns.push(t => {
     if (bars.length !== live.items.length) build();
     bars.forEach((b, i) => {

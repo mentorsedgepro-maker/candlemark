@@ -1057,3 +1057,21 @@ tr.instrument-row.closed .buy-btn,tr.instrument-row.closed .sell-btn,.buy-btn:di
 /* section slide-up on scroll */
 .sec-reveal{opacity:0;transform:translate3d(0,48px,0);transition:opacity .8s var(--ease),transform .8s var(--ease);will-change:opacity,transform}
 .sec-reveal.in-view{opacity:1;transform:none;will-change:auto}
+
+@media (max-width:700px){
+  #heroCanvas{opacity:1}
+  .hero{padding:118px 18px 90px}
+  .hero-title{font-size:clamp(1.9rem,9vw,2.6rem)}
+  .hero-vignette{background:radial-gradient(ellipse 95% 34% at 50% 44%,rgba(255,255,255,.88),transparent 75%),linear-gradient(to bottom,rgba(255,255,255,.3),transparent 25%,transparent 75%,var(--bg-void))}
+  [data-theme="dark"] .hero-vignette{background:radial-gradient(ellipse 95% 34% at 50% 44%,rgba(10,13,18,.88),transparent 75%),linear-gradient(to bottom,rgba(10,13,18,.3),transparent 25%,transparent 75%,var(--bg-void))}
+  .fx-stage{height:clamp(360px,62svh,500px);border-radius:20px}
+  .fx-stage canvas,.fx-full>canvas{touch-action:pan-y}
+  .mk-wrap .fx-stage{order:-1}
+  .mk-wrap .market-grid{grid-template-columns:1fr 1fr;gap:12px}
+  .market-card{padding:18px}.market-card p{font-size:.82rem;margin-bottom:0}
+  .fx-full{min-height:600px;margin:24px 0}.fx-in{padding:150px 22px}
+  .heat-info{left:10px;right:10px;bottom:10px;font-size:12px}
+  .tl-stack{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;margin-inline:-22px;padding:4px 22px 12px;scrollbar-width:none}
+  .tl-stack::-webkit-scrollbar{display:none}
+  .tl-stack .tool-card{flex:0 0 78%;scroll-snap-align:center}
+}

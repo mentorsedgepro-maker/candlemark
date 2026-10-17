@@ -204,7 +204,7 @@
   function openCopy(e) {
     const b = e.target.closest('[data-copy-mentor]'); if (!b) return;
     const m = picked = mentors.find(x => x.id === b.dataset.copyMentor), s = m.stats || {};
-    $$id('pmAvatar').style.background = grad(hue(m.handle));
+    $$id('pmAvatar').style.background = m.avatar ? `url(${esc(m.avatar)}) center/cover` : grad(hue(m.handle));
     $$id('pmName').textContent = m.name; $$id('pmHandle').textContent = '@' + m.handle;
     $$id('pmGain').textContent = s.gain != null ? s.gain + '%' : '—';
     $$id('pmTrades').textContent = s.trades != null ? Number(s.trades).toLocaleString() : '—';
