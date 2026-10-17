@@ -1075,3 +1075,39 @@ tr.instrument-row.closed .buy-btn,tr.instrument-row.closed .sell-btn,.buy-btn:di
   .tl-stack::-webkit-scrollbar{display:none}
   .tl-stack .tool-card{flex:0 0 78%;scroll-snap-align:center}
 }
+
+/* nav fit */
+@media (max-width:560px){
+  .nav-inner{padding:0 12px;gap:8px}
+  .nav-actions{gap:6px;min-width:0}
+  .nav-actions .btn-solid{display:none}
+  .nav-actions .lang-sel{max-width:88px;padding:7px 6px;font-size:12px}
+  .brand-word{font-size:16px}
+  .brand-mark svg{width:22px;height:22px}
+}
+
+/* section 5 mobile replacement */
+.tool-bars{display:none}
+@media (max-width:700px){
+  .tools .fx-stage{display:none}
+  .tool-bars{display:flex;align-items:flex-end;gap:7px;height:150px;padding:18px;margin-bottom:16px;border-radius:20px;background:linear-gradient(160deg,var(--brand-50),var(--bg-panel));border:1px solid var(--brand-100);box-shadow:var(--shadow-md)}
+  .tool-bars i{flex:1;height:60%;border-radius:5px;background:var(--grad-brand);transform-origin:bottom;animation:tbar 2.4s ease-in-out infinite}
+  .tool-bars i:nth-child(3n){height:90%;background:var(--brand-300)}
+  .tool-bars i:nth-child(4n){height:38%}
+  .tool-bars i:nth-child(2n){animation-delay:.4s}
+  .tool-bars i:nth-child(3n){animation-delay:.8s}
+  .tool-bars i:nth-child(5n){animation-delay:1.2s}
+}
+@keyframes tbar{0%,100%{transform:scaleY(.45)}50%{transform:scaleY(1)}}
+
+/* section 3 restyle */
+.chart-step{background:linear-gradient(160deg,var(--bg-panel),var(--bg-panel-2));border-radius:20px;transition:opacity .7s var(--ease),transform .7s var(--ease),border-color .4s,box-shadow .4s}
+.chart-step::after{content:"";position:absolute;inset:16px auto 16px 0;width:3px;border-radius:0 3px 3px 0;background:var(--grad-brand)}
+.chart-step .road-num{background:var(--grad-brand);color:#fff;border:0;font-weight:600;box-shadow:0 8px 20px -8px rgba(34,114,230,.6)}
+.chart-step.in-view{box-shadow:var(--shadow-md)}
+@media (max-width:900px){
+  .chart-step{transform:translateX(28px) scale(.97)}
+  .chart-step.step-left{transform:translateX(-28px) scale(.97)}
+  .chart-step.in-view{transform:none}
+}
+.chart-step.in-view.fade-out{opacity:0;transform:translateY(-26px) scale(.96)}

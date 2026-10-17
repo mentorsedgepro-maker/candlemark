@@ -417,3 +417,19 @@ loadTicker(); setInterval(loadTicker, 5000);
   }
   animate();
 })();
+
+/* section 3: fade in/out both directions */
+(function(){
+  const io = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('fade-out', !e.isIntersecting)), { threshold:.2 });
+  document.querySelectorAll('.chart-step').forEach(s => io.observe(s));
+})();
+
+/* section 5 mobile: auto-scrolling cards */
+(function(){
+  const el = document.querySelector('.tl-stack');
+  if(!el || !matchMedia('(max-width:700px)').matches) return;
+  const cards = [...el.children]; let i = 0, hold = false, t;
+  setInterval(()=>{ if(hold) return; i = (i+1) % cards.length; cards[i].scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' }); }, 3000);
+  el.addEventListener('touchstart', ()=>{ hold = true; clearTimeout(t); }, { passive:true });
+  el.addEventListener('touchend', ()=>{ i = Math.round(el.scrollLeft / (cards[0].offsetWidth + 12)); t = setTimeout(()=> hold = false, 4000); });
+})();

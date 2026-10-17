@@ -127,7 +127,7 @@ pull(); setInterval(pull, 5000);
 
 /* 5 — TOOLS */
 (() => {
-  const g = stage('toolCanvas', 11); if (!g) return;
+  if (SM) return; const g = stage('toolCanvas', 11); if (!g) return;
   const G = [new THREE.TorusKnotGeometry(.8, .25, 80, 12), new THREE.OctahedronGeometry(1.1), new THREE.CylinderGeometry(1, 1, .4, 32)];
   const S = G.map((geo, i) => {
     const m = new THREE.Mesh(geo, new THREE.MeshStandardMaterial({ color: [B, L, D][i], roughness: .35, metalness: .2 }));
