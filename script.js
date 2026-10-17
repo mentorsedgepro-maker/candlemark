@@ -428,8 +428,13 @@ loadTicker(); setInterval(loadTicker, 5000);
 (function(){
   const el = document.querySelector('.tl-stack');
   if(!el || !matchMedia('(max-width:700px)').matches) return;
-  const cards = [...el.children]; let i = 0, hold = false, t;
-  setInterval(()=>{ if(hold) return; i = (i+1) % cards.length; cards[i].scrollIntoView({ behavior:'smooth', inline:'center', block:'nearest' }); }, 3000);
+  const cards = [...el.children]; let i = 0, hold = false, vis = false, t;
+  new IntersectionObserver(([e]) => vis = e.isIntersecting, { threshold:.4 }).observe(el);
+  setInterval(()=>{
+    if(hold || !vis) return;
+    i = (i + 1) % cards.length;
+    el.scrollTo({ left: cards[i].offsetLeft - (el.clientWidth - cards[i].offsetWidth) / 2, behavior:'smooth' });
+  }, 3000);
   el.addEventListener('touchstart', ()=>{ hold = true; clearTimeout(t); }, { passive:true });
   el.addEventListener('touchend', ()=>{ i = Math.round(el.scrollLeft / (cards[0].offsetWidth + 12)); t = setTimeout(()=> hold = false, 4000); });
 })();
