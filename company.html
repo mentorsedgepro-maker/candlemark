@@ -2,10 +2,10 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>About MentorsEdgePro</title>
 <script src="theme.js"></script>
-<meta name="description" content="Learn about the platform, how mentors are presented and how we operate.">
+<meta name="description" content="Meet MentorsEdgePro: our vision, what we offer, how the platform works and the values behind it.">
 <link rel="canonical" href="https://mentorsedgepro.co/company?p=about">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="32x32">
@@ -14,18 +14,82 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="MentorsEdgePro">
 <meta property="og:title" content="About MentorsEdgePro">
-<meta property="og:description" content="Learn about the platform, how mentors are presented and how we operate.">
+<meta property="og:description" content="Meet MentorsEdgePro: our vision, what we offer, how the platform works and the values behind it.">
 <meta property="og:url" content="https://mentorsedgepro.co/company?p=about">
 <meta property="og:image" content="https://mentorsedgepro.co/og.png">
 <meta name="twitter:card" content="summary_large_image">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <style>
+.ab-wrap{max-width:var(--container);margin:0 auto;padding:0 24px}
+.ab-hero{position:relative;overflow:hidden;padding:150px 24px 80px;text-align:center}
+.ab-hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(to right,rgba(34,114,230,.06) 1px,transparent 1px),linear-gradient(to bottom,rgba(34,114,230,.06) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 70% 70% at 50% 30%,#000 25%,transparent 75%)}
+.ab-glow{position:absolute;left:50%;top:-140px;width:720px;height:720px;transform:translateX(-50%);border-radius:50%;background:radial-gradient(circle,rgba(34,114,230,.16),transparent 65%);animation:abBreath 7s ease-in-out infinite}
+@keyframes abBreath{50%{opacity:.55;transform:translateX(-50%) scale(1.08)}}
+.ab-hero-in{position:relative;max-width:820px;margin:0 auto}
+.ab-hero h1{font-size:clamp(2.1rem,5.2vw,3.8rem);line-height:1.1;letter-spacing:-.02em;margin:8px 0 18px}
+.ab-hero .lead{color:var(--text-secondary);font-size:1.08rem;max-width:660px;margin:0 auto 34px}
+.ab-vm{display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:820px;margin:0 auto;text-align:left}
+.ab-vm div{background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:22px;box-shadow:var(--shadow-sm)}
+.ab-vm small{font:500 11px var(--font-mono);letter-spacing:.12em;text-transform:uppercase;color:var(--brand)}
+.ab-vm p{margin-top:8px;color:var(--text-secondary);font-size:.95rem}
+
+.ab-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:0;margin:56px 0 0;border:1px solid var(--line);border-radius:var(--radius-m);background:var(--bg-panel);box-shadow:var(--shadow-md);overflow:hidden}
+.ab-stat{padding:26px 18px;text-align:center;border-right:1px solid var(--line)}
+.ab-stat:last-child{border-right:0}
+.ab-stat b{display:block;font:600 clamp(1.5rem,3vw,2.2rem) var(--font-mono);color:var(--brand)}
+.ab-stat span{font-size:12.5px;color:var(--text-tertiary)}
+
+.ab-sec{padding:84px 0 0}
+.ab-head{max-width:640px;margin-bottom:36px}
+.ab-head.c{margin-left:auto;margin-right:auto;text-align:center}
+.ab-head h2{font-size:clamp(1.6rem,3.2vw,2.4rem);line-height:1.2;margin:4px 0 10px}
+.ab-head p{color:var(--text-secondary)}
+
+.ab-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.ab-card{position:relative;background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:26px;box-shadow:var(--shadow-sm);transition:transform .3s var(--ease),border-color .3s,box-shadow .3s}
+.ab-card:hover{transform:translateY(-4px);border-color:var(--brand-200);box-shadow:var(--shadow-md)}
+.ab-ico{width:46px;height:46px;border-radius:12px;background:var(--brand-50);border:1px solid var(--brand-100);color:var(--brand);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.ab-ico svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.ab-card h3{font-size:1.05rem;margin-bottom:6px}
+.ab-card p{color:var(--text-secondary);font-size:.92rem}
+
+.ab-tl{position:relative;max-width:820px;margin:0 auto;padding-left:34px}
+.ab-tl::before{content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;background:var(--line-strong)}
+.ab-tl::after{content:"";position:absolute;left:9px;top:6px;width:2px;height:calc(var(--p,0)*(100% - 12px));background:var(--brand);box-shadow:0 0 10px rgba(34,114,230,.6);transition:height .25s linear}
+.ab-step{position:relative;padding:0 0 30px}
+.ab-step:last-child{padding-bottom:0}
+.ab-step::before{content:"";position:absolute;left:-33px;top:4px;width:16px;height:16px;border-radius:50%;background:var(--bg-panel);border:2px solid var(--line-strong);transition:all .4s var(--ease)}
+.ab-step.in-view::before{background:var(--brand);border-color:var(--brand);box-shadow:0 0 0 5px var(--brand-dim)}
+.ab-step small{font:500 11px var(--font-mono);letter-spacing:.12em;color:var(--brand);text-transform:uppercase}
+.ab-step h3{font-size:1.1rem;margin:4px 0 6px}
+.ab-step p{color:var(--text-secondary);font-size:.94rem}
+
+.ab-inst{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.ab-inst a{display:flex;align-items:center;gap:10px;padding:13px 20px;background:var(--bg-panel);border:1px solid var(--line);border-radius:100px;font-weight:600;font-size:14px;box-shadow:var(--shadow-sm);transition:transform .25s var(--ease),border-color .25s,color .25s}
+.ab-inst a:hover{transform:translateY(-3px);border-color:var(--brand);color:var(--brand-600)}
+.ab-inst small{font:500 11px var(--font-mono);color:var(--text-tertiary)}
+
+.ab-notice{margin-top:84px;padding:20px 22px;border:1px solid var(--line);border-radius:var(--radius-m);background:var(--bg-panel);color:var(--text-secondary);font-size:.9rem;line-height:1.7}
+.ab-notice strong{color:var(--text-primary)}
+.ab-notice a{color:var(--brand)}
+.ab-cta{margin:56px auto 70px;text-align:center;padding:70px 28px;border:1px solid var(--brand-200);border-radius:var(--radius-l);background:linear-gradient(160deg,#E4F0FF 0%,#fff 70%);box-shadow:var(--shadow-md)}
+[data-theme="dark"] .ab-cta{background:linear-gradient(160deg,#16233A,#12161D 70%)}
+.ab-cta h2{font-size:clamp(1.5rem,3vw,2.2rem);margin-bottom:12px}
+.ab-cta p{color:var(--text-secondary);max-width:520px;margin:0 auto 26px}
+.ab-risk{font-size:.78rem;color:var(--text-tertiary);line-height:1.7;margin-bottom:60px}
+
 .co{max-width:760px;margin:0 auto;padding:110px 22px 60px}
 .co h1{font-size:clamp(1.8rem,4vw,2.4rem);margin:6px 0 16px}
 .co h2{margin:28px 0 8px;font-size:1.15rem}.co p{color:var(--text-secondary);margin-bottom:10px}
 .co .note{padding:14px 16px;border:1px solid var(--gold-dim);border-radius:8px;background:var(--bg-panel);color:var(--text-primary);font-size:.9rem}
 .co-cta{margin-top:28px;display:flex;gap:12px;flex-wrap:wrap}
+
+@media(max-width:900px){.ab-grid{grid-template-columns:1fr 1fr}.ab-stats{grid-template-columns:1fr 1fr}.ab-stat:nth-child(2){border-right:0}.ab-stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
+@media(max-width:600px){.ab-hero{padding:120px 18px 60px}.ab-wrap{padding:0 18px}.ab-vm,.ab-grid{grid-template-columns:1fr}.ab-sec{padding-top:64px}.ab-cta{padding:48px 18px}}
+@media(prefers-reduced-motion:reduce){.ab-glow{animation:none}.ab-card{transition:none}}
 </style>
 </head>
 <body>
@@ -33,31 +97,195 @@
   <a href="index.html" class="brand"><span class="brand-word">Mentorsedge<em>Pro</em></span></a>
   <div class="nav-actions"><a href="login.html" class="btn-ghost">Log in</a><a href="register.html" class="btn-solid"><span>Get Started</span></a></div>
 </div></header>
-<main class="co" id="co"></main>
-<script>
-const P = {
-  about: ['About us', 'Company', [
-    ['What we do', 'MentorsedgePro provides a web interface for account registration, market information, mentor profiles, and copy-trading features. Information may be delayed, incomplete, or unverified as live, and feature availability may depend on your account and location.'],
-    ['How mentors are presented', 'The site does not publish a detailed, independently verifiable mentor identity or track-record review process. Mentor profiles and performance figures are platform-supplied and should not be treated as independently verified.'],
-    ['Our story', 'A verifiable company history or founding date is not published in the materials currently available on this site.'],
-    ['Where we are', 'The site materials do not currently identify the operating legal entity, company registration number, or registered office. Review the legal terms and verify the operator before relying on the service.'],
-  ]],
-  security: ['Regulation & Security', 'Trust', [
+
+<div id="about">
+  <section class="ab-hero">
+    <div class="ab-glow" aria-hidden="true"></div>
+    <div class="ab-hero-in">
+      <span class="eyebrow" data-reveal>Company · About us</span>
+      <h1 data-reveal>Trading you can <span class="grad-text">see into.</span></h1>
+      <p class="lead" data-reveal>MentorsEdgePro brings multi-asset markets and mentor-led copytrading into one account, with the numbers, tools and controls laid out in the open so you can decide for yourself.</p>
+      <div class="ab-vm" data-reveal>
+        <div><small>Our vision</small><p>To build the most transparent, easy-to-use home for copytrading.</p></div>
+        <div><small>Our mission</small><p>Give every trader clear mentor data, practical tools and firm risk controls, and keep improving all three.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ab-wrap">
+    <div class="ab-stats" data-reveal>
+      <div class="ab-stat"><b id="sM">—</b><span>Mentors listed</span></div>
+      <div class="ab-stat"><b id="sI">—</b><span>Instruments</span></div>
+      <div class="ab-stat"><b>5</b><span>Asset classes</span></div>
+      <div class="ab-stat"><b>4</b><span>Built-in trading tools</span></div>
+    </div>
+
+    <section class="ab-sec">
+      <div class="ab-head c" data-reveal>
+        <span class="eyebrow">01 — Why traders choose us</span>
+        <h2>Built around clarity and control</h2>
+        <p>Six things we focus on, each one something you can check inside the platform.</p>
+      </div>
+      <div class="ab-grid">
+        <article class="ab-card" data-reveal>
+          <div class="ab-ico"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.2"/><path d="M3 20c.4-3.3 2.7-5.4 6-5.4s5.6 2.1 6 5.4"/><path d="M16 5.5a3 3 0 0 1 0 5.6M18 14.8c1.7.7 2.8 2.4 3 5.2"/></svg></div>
+          <h3>Mentor-led copytrading</h3>
+          <p>Browse mentors by risk, win rate and trade count. Mentors are approved by an admin before they appear on the Mentorboard.</p>
+        </article>
+        <article class="ab-card" data-reveal>
+          <div class="ab-ico"><svg viewBox="0 0 24 24"><path d="M4 18V9m5 9V5m5 13v-6m5 6V8"/></svg></div>
+          <h3>Five asset classes</h3>
+          <p>Forex, stocks, crypto, indices and commodities from one balance, with market-closed states shown clearly.</p>
+        </article>
+        <article class="ab-card" data-reveal>
+          <div class="ab-ico"><svg viewBox="0 0 24 24"><path d="M12 3 4.5 6v6c0 4.5 3.2 7.4 7.5 9 4.3-1.6 7.5-4.5 7.5-9V6L12 3Z"/><path d="m9 12 2.2 2.2L15.5 10"/></svg></div>
+          <h3>Account security</h3>
+          <p>Email verification, optional two-factor authentication and identity verification before any withdrawal.</p>
+        </article>
+        <article class="ab-card" data-reveal>
+          <div class="ab-ico"><svg viewBox="0 0 24 24"><path d="M5 5h14M5 12h14M5 19h9"/><path d="m17 17 2 2 3-4"/></svg></div>
+          <h3>Risk controls</h3>
+          <p>Set stop loss and take profit on every trade, and pause or stop any copy from your dashboard at any time.</p>
+        </article>
+        <article class="ab-card" data-reveal>
+          <div class="ab-ico"><svg viewBox="0 0 24 24"><path d="M4 5.5C4 4.7 4.7 4 5.5 4H11v15H5.5C4.7 19 4 19.7 4 20.5V5.5ZM20 5.5c0-.8-.7-1.5-1.5-1.5H13v15h5.5c.8 0 1.5.7 1.5 1.5V5.5Z"/></svg></div>
+          <h3>Free learning tools</h3>
+          <p>Practise in the Trader's Gym, follow the Economic Calendar and read the Signal Centre, all without risking a balance.</p>
+        </article>
+        <article class="ab-card" data-reveal>
+          <div class="ab-ico"><svg viewBox="0 0 24 24"><path d="M4 6.5h16v9H9l-4 3.5v-3.5H4v-9Z"/><path d="M8 10h8"/></svg></div>
+          <h3>Human support</h3>
+          <p>Questions about your account? Message our team from the Support page and we reply by email.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="ab-sec">
+      <div class="ab-head c" data-reveal>
+        <span class="eyebrow">02 — How it works</span>
+        <h2>From sign-up to your first copied trade</h2>
+      </div>
+      <div class="ab-tl" id="tl">
+        <div class="ab-step"><small>Step 01</small><h3>Create and verify your account</h3><p>Register with your email, then confirm it with a six-digit code.</p></div>
+        <div class="ab-step"><small>Step 02</small><h3>Complete identity verification</h3><p>Submit your profile and ID so withdrawals can be enabled once reviewed.</p></div>
+        <div class="ab-step"><small>Step 03</small><h3>Fund your account</h3><p>Send a crypto deposit and upload proof. Funds are credited after verification.</p></div>
+        <div class="ab-step"><small>Step 04</small><h3>Choose a mentor or trade yourself</h3><p>Compare mentor profiles, set an allocation, or place your own trades with stop loss and take profit.</p></div>
+        <div class="ab-step"><small>Step 05</small><h3>Stay in control</h3><p>Track positions and your ledger live, pause or stop copies, and request withdrawals when you choose.</p></div>
+      </div>
+    </section>
+
+    <section class="ab-sec">
+      <div class="ab-head c" data-reveal>
+        <span class="eyebrow">03 — Our values</span>
+        <h2>What we hold ourselves to</h2>
+      </div>
+      <div class="ab-grid">
+        <article class="ab-card" data-reveal>
+          <div class="ab-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c.5-4 3.2-6 7-6s6.5 2 7 6"/></svg></div>
+          <h3>Client first</h3>
+          <p>We listen to feedback and use it to make the platform clearer and easier to use.</p>
+        </article>
+        <article class="ab-card" data-reveal>
+          <div class="ab-ico"><svg viewBox="0 0 24 24"><rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg></div>
+          <h3>Security matters</h3>
+          <p>Strong sign-in protection and careful handling of your data come before any new feature.</p>
+        </article>
+        <article class="ab-card" data-reveal>
+          <div class="ab-ico"><svg viewBox="0 0 24 24"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2.1h5c0-.9.4-1.6 1-2.1A6 6 0 0 0 12 3Z"/></svg></div>
+          <h3>Knowledge is the key</h3>
+          <p>Better decisions start with understanding, so we build learning tools into the platform.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="ab-sec">
+      <div class="ab-head c" data-reveal>
+        <span class="eyebrow">04 — Markets</span>
+        <h2>Explore what you can trade</h2>
+        <p>Pick an asset class to see its instruments and live prices.</p>
+      </div>
+      <div class="ab-inst" data-reveal>
+        <a href="markets.html?m=forex">Forex <small>→</small></a>
+        <a href="markets.html?m=stocks">Stocks <small>→</small></a>
+        <a href="markets.html?m=crypto">Crypto <small>→</small></a>
+        <a href="markets.html?m=indices">Indices <small>→</small></a>
+        <a href="markets.html?m=commodities">Commodities <small>→</small></a>
+      </div>
+    </section>
+
+    <aside class="ab-notice" data-reveal>
+      <strong>Who operates this service?</strong>
+      Legal entity details, registration references and regulator links are published on our <a href="regulation.html">Regulation &amp; Licensing</a> page, and the contracting entity is named in the <a href="legal.html?p=terms">Client Agreement</a>. Mentor figures are supplied by the platform and are not independently verified. Please review both before funding an account, and see our <a href="company.html?p=security">Security</a> page for how accounts and funds are described.
+    </aside>
+
+    <section class="ab-cta" data-reveal>
+      <h2>Start trading with your eyes open.</h2>
+      <p>Whether you're new or experienced, create an account in minutes and explore the tools before you commit.</p>
+      <a href="register.html" class="btn-solid btn-lg" style="margin-right:10px"><span>Create an account</span></a>
+      <a href="mentorboard.html" class="btn-outline btn-lg"><span>Browse mentors</span></a>
+    </section>
+
+    <p class="ab-risk"><strong>Risk warning:</strong> Leveraged products carry a high risk of rapid losses, and copytrading does not guarantee profit. Past performance does not predict future results. This page is general information, not investment advice.</p>
+  </div>
+</div>
+
+<main class="co" id="co" style="display:none"></main>
+
+<script src="config.js" defer></script>
+<script defer>
+addEventListener('DOMContentLoaded', () => {
+const key = new URLSearchParams(location.search).get('p');
+
+if (key === 'security') {
+  const P = ['Regulation & Security', 'Trust', [
     ['Regulatory status', 'The Regulation & Licensing page lists the Financial Conduct Authority (FCA), the Cyprus Securities and Exchange Commission (CySEC), and the Australian Securities & Investments Commission (ASIC), with associated registration references. These listings are not independent verification and do not by themselves establish that the platform is authorised to provide regulated financial services. Account registration is not evidence of authorisation. Verify the provider and its permissions directly with the relevant regulator before transferring funds or trading.'],
     ['Account security', 'The sign-in flow uses an email address and password and may request a six-digit two-factor authentication code. The site materials do not describe password storage or session-security controls, or confirm that two-factor authentication is available to every user. Use a unique password, never share authentication codes, and contact Support if you suspect unauthorised access.'],
     ['Your funds', 'The site does not provide verifiable details about who holds client funds or whether funds are segregated, insured, or covered by a compensation scheme. A displayed balance alone does not establish that funds are held or protected. Confirm the provider, custody arrangements, and applicable protections before sending money.'],
     ['Data protection', 'The Privacy Policy identifies mentorsedgepro Ltd. as the operator and describes the personal information it collects, how it may be used and shared, international transfers, cookies, security, and your rights. Contact details for privacy requests are not provided in the policy text.'],
     ['Reporting a problem', 'For support enquiries or to report suspicious activity, contact us through <a href="support.html" style="color:var(--brand)">Support</a>.'],
-  ]],
+  ]];
+  const esc = (s) => s.replace(/[&<>]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  document.title = 'Regulation & Security: MentorsEdgePro';
+  document.getElementById('about').style.display = 'none';
+  const co = document.getElementById('co'); co.style.display = '';
+  co.innerHTML = `<span class="eyebrow">${P[1]}</span><h1>${P[0]}</h1>` +
+    P[2].map(([h, t]) => `<h2>${esc(h)}</h2><p>${t.includes('<a ') ? t : esc(t)}</p>`).join('') +
+    `<p class="note">Trading involves a high risk of loss. Information on this site is not a substitute for provider documents or independent advice.</p>
+     <div class="co-cta"><a href="register.html" class="btn-solid"><span>Create an account</span></a><a href="mentorboard.html" class="btn-outline"><span>Browse mentors</span></a></div>`;
+  return;
+}
+
+/* reveal on scroll */
+const io = new IntersectionObserver((es) => es.forEach((e) => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add('in-view'); io.unobserve(e.target);
+}), { threshold: .15, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('#about [data-reveal]').forEach((el, i) => { el.style.transitionDelay = (i % 3) * 70 + 'ms'; io.observe(el); });
+
+/* timeline progress */
+const tl = document.getElementById('tl'), steps = [...tl.children];
+const sio = new IntersectionObserver((es) => es.forEach((e) => e.target.classList.toggle('in-view', e.isIntersecting || e.boundingClientRect.top < 0)), { threshold: 0, rootMargin: '0px 0px -40% 0px' });
+steps.forEach((s) => sio.observe(s));
+let tick = false;
+const prog = () => {
+  tick = false;
+  const r = tl.getBoundingClientRect(), p = Math.max(0, Math.min(1, (innerHeight * .65 - r.top) / r.height));
+  tl.style.setProperty('--p', p.toFixed(3));
 };
-const key = new URLSearchParams(location.search).get('p');
-const [title, eyebrow, secs] = P[key] || P.about;
-document.title = key === 'security' ? 'Regulation & Security: MentorsEdgePro' : 'About MentorsEdgePro';
-const esc = (s) => s.replace(/[&<>]/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-document.getElementById('co').innerHTML = `<span class="eyebrow">${eyebrow}</span><h1>${title}</h1>` +
-  secs.map(([h, t]) => `<h2>${esc(h)}</h2><p>${t.includes('<a ') ? t : esc(t)}</p>`).join('') +
-  `<p class="note">Trading involves a high risk of loss. Information on this site is not a substitute for provider documents or independent advice.</p>
-   <div class="co-cta"><a href="register.html" class="btn-solid"><span>Create an account</span></a><a href="mentorboard.html" class="btn-outline"><span>Browse mentors</span></a></div>`;
+addEventListener('scroll', () => { if (!tick) { tick = true; requestAnimationFrame(prog); } }, { passive: true });
+prog();
+
+/* live stats from the platform */
+const count = (el, n) => {
+  const t0 = performance.now();
+  const f = (t) => { const p = Math.min((t - t0) / 1200, 1); el.textContent = Math.round(n * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(f); };
+  requestAnimationFrame(f);
+};
+if (typeof API_BASE !== 'undefined') {
+  fetch(API_BASE + '/markets').then((r) => r.json()).then((d) => count(document.getElementById('sI'), d.items.length)).catch(() => {});
+  fetch(API_BASE + '/mentors').then((r) => r.json()).then((d) => count(document.getElementById('sM'), d.items.length)).catch(() => {});
+}
+});
 </script>
 </body>
 </html>
