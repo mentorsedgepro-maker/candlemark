@@ -23,7 +23,11 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<!-- Warm up the API and the 3D library so they are ready when needed -->
+<link rel="preconnect" href="https://api.mentorsedgepro.co" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
 
 <link rel="stylesheet" href="style.css">
 </head>
@@ -81,6 +85,7 @@
       </div>
 
       <a href="#results" class="nav-link nav-link-simple">Results</a>
+      <a href="company.html?p=about" class="nav-link nav-link-simple">About</a>
       <a href="support.html" class="nav-link nav-link-simple">Support</a>
     </nav>
 
@@ -105,6 +110,7 @@
   <a href="mentorboard.html">Copytrading</a>
   <a href="tools.html">Tools</a>
   <a href="#results">Results</a>
+  <a href="company.html?p=about">About</a>
   <a href="support.html">Support</a>
   <a href="login.html" class="mm-ghost">Log in</a>
   <a href="register.html" class="mm-solid">Get Started</a>
@@ -234,8 +240,7 @@
     <a href="mentorboard.html" class="btn-solid magnetic"><span>Browse the Mentorboard</span></a>
   </div>
   <div class="copytrader-video-frame copy-feature-video">
-    <video class="copytrader-video" autoplay muted loop playsinline preload="metadata">
-      <source src="assests/copytrader-desk.mp4" type="video/mp4">
+    <video class="copytrader-video" autoplay muted loop playsinline preload="none" data-lazy-video="assests/copytrader-desk.mp4">
       Your browser does not support video playback.
     </video>
   </div>
@@ -445,11 +450,29 @@
   </div>
 </footer>
 
-<script src="config.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-<script src="fx3d.js"></script>
-<script src="script.js"></script>
-<script src="touch-fx.js"></script>
-<script src="i18n.js"></script>
+<!-- Scripts are deferred: HTML paints first, execution order is preserved -->
+<script src="config.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js" defer></script>
+<script src="fx3d.js" defer></script>
+<script src="script.js" defer></script>
+<script src="touch-fx.js" defer></script>
+<script src="i18n.js" defer></script>
+<script>
+/* Load the below-the-fold video only when it is about to be seen */
+(function(){
+  var v = document.querySelector('video[data-lazy-video]');
+  if (!v) return;
+  var load = function(){
+    var s = document.createElement('source');
+    s.src = v.dataset.lazyVideo; s.type = 'video/mp4';
+    v.appendChild(s); v.load(); v.play().catch(function(){});
+  };
+  if (!('IntersectionObserver' in window)) return load();
+  var io = new IntersectionObserver(function(es){
+    if (es[0].isIntersecting){ io.disconnect(); load(); }
+  }, { rootMargin: '300px 0px' });
+  io.observe(v);
+})();
+</script>
 </body>
 </html>
