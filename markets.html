@@ -56,7 +56,6 @@ const M = {
   crypto:{n:'Crypto',cls:'mc-crypto',d:'Bitcoin, Ethereum and other liquid digital assets.',f:[['Major coins','BTC, ETH, SOL, XRP.'],['24/7 prices','Crypto markets never close.'],['High volatility','Large swings in both directions.']]},
   indices:{n:'Indices',cls:'mc-indices',d:'Trade the direction of whole markets through index baskets.',f:[['Global benchmarks','S&P 500, Nasdaq 100, Dow Jones, FTSE 100.'],['Broad exposure','One position tracks many companies.'],['Macro driven','Moved by economic data and central banks.']]},
   commodities:{n:'Commodities',cls:'mc-commodities',d:'Gold, silver, oil and gas, the hard assets behind the economy.',f:[['Metals','Gold and silver.'],['Energy','Crude oil and natural gas.'],['Safe-haven demand','Gold often reacts to market stress.']]},
-  etf:{n:'ETFs & Futures',cls:'mc-etf',d:'Basket exposure and fixed-date contracts for structured strategies.',f:[['ETFs','One ticket, a basket of assets.'],['Futures','Fixed date, fixed price contracts.'],['Coming soon','Not yet available on the platform.']]},
 };
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const RISK = '<p class="mk-risk"><strong>Risk warning:</strong> Leveraged products carry a high risk of rapid losses. Prices shown may be delayed, incomplete, or unverified as executable quotes. This is not investment advice.</p>';
@@ -73,10 +72,10 @@ if (!M[key]) {
   document.title = v.n + ' — mentorsedgepro';
   root.innerHTML = `<span class="eyebrow">Markets</span><h1>${esc(v.n)}</h1><p class="lead">${esc(v.d)}</p>
     <div class="mk-tabs">${Object.entries(M).map(([k, x]) => `<a href="markets.html?m=${k}" class="${k === key ? 'on' : ''}">${esc(x.n)}</a>`).join('')}</div>
-    <div class="mk-card" id="tbl"><p style="padding:20px;color:var(--text-tertiary)">${key === 'etf' ? 'ETFs and futures are not available yet.' : 'Loading prices…'}</p></div>
+    <div class="mk-card" id="tbl"><p style="padding:20px;color:var(--text-tertiary)">Loading prices…</p></div>
     <div class="mk-feats">${v.f.map(([h, t]) => `<div><h3>${esc(h)}</h3><p>${esc(t)}</p></div>`).join('')}</div>
     <div class="mk-cta"><a href="register.html" class="btn-solid"><span>Create an account</span></a><a href="markets.html" class="btn-outline"><span>All markets</span></a></div>${RISK}`;
-  if (key !== 'etf') {
+  {
     const load = async () => {
       try {
         const { items } = await (await fetch(API_BASE + '/markets?asset=' + key)).json();

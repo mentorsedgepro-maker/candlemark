@@ -71,7 +71,7 @@ spForm.addEventListener('submit', async (e) => {
     spForm.reset();
   } catch (err) {
     $('spErr').textContent = err.status === 429 ? 'Too many messages, try again in a few minutes.'
-      : err.data?.error === 'VALIDATION' ? 'Please fill every field (message needs 10+ characters).' : 'Could not send, try again.';
+      : err.data?.error === 'VALIDATION' ? 'Please fill every field (message needs 10+ characters).' : 'Could not send: ' + (err.status || '') + ' ' + (err.data?.error || err.message);
   } finally {
     $('spGo').disabled = false;
     $('spGo').classList.remove('loading');
