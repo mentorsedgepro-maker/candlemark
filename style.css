@@ -16,13 +16,13 @@
   --text-tertiary:#667791;
 
   /* brand — light blue family */
-  --brand:#2272E6;
-  --brand-600:#1B5FC8;
+  --brand:#0e5dd3;
+  --brand-600:#145bc7;
   --brand-400:#4F9BFF;
-  --brand-300:#8CC0FF;
-  --brand-200:#BFDBFF;
-  --brand-100:#DCEBFF;
-  --brand-50:#EEF5FF;
+  --brand-300:#4793ef;
+  --brand-200:#9cc3f6;
+  --brand-100:#b4d3fb;
+  --brand-50:#d3e5fd;
   --brand-dim:rgba(34,114,230,0.10);
 
   /* market semantics (kept distinct from brand) */
