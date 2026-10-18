@@ -176,7 +176,7 @@ async function doLogin(email, password, totp){
   const pwField = document.getElementById('loginPassword').closest('.field');
   btn.classList.add('loading'); btn.disabled = true;
   try{
-    const r = await api('/auth/login', { method:'POST', auth:false, body:{ email, password, ...(totp && { totp }) } });
+    const r = await api('/auth/login', { method:'POST', auth:false, body:{ email, password, remember: document.getElementById('loginRemember').checked, ...(totp && { totp }) } });
     api.setToken(r.accessToken);
     document.getElementById('loginSuccess').classList.add('show');
     redirectTo('dashboard.html', 500);

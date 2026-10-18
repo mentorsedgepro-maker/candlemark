@@ -147,15 +147,15 @@
   }
 
   // transactions
-  let txItems = [], txF = 'All';
+  let txItems = [], txRows = [], txF = 'All';
   const TXF = { Deposits: ['DEPOSIT'], Withdrawals: ['WITHDRAWAL'], Trades: ['TRADE_PNL'], Copytrades: ['COPY_FEE'] };
   const txNames = { DEMO_FUNDING:'Funding', DEPOSIT:'Deposit', WITHDRAWAL:'Withdrawal', TRADE_PNL:'Trade', COPY_FEE:'Copy fee', ADJUSTMENT:'Adjustment' };
   function renderTx(){
-    const rows = txItems.filter(r => txF === 'All' || TXF[txF].includes(r.type));
-    document.getElementById('txBody').innerHTML = rows.length ? rows.map(r => {
+    const rows = txItems.filter(r => txF === 'All' || TXF[txF].includes(r.type)); txRows = rows;
+    document.getElementById('txBody').innerHTML = rows.length ? rows.map((r, i) => {
       const up = BigInt(r.amount) >= 0n, abs = r.amount.replace('-','');
       const detail = r.type === 'TRADE_PNL' ? (up ? 'Position closed' : 'Position opened') : (r.refType || '');
-      return `<tr><td style="font-family:var(--font-mono);color:var(--text-tertiary)">${r.id.slice(-8).toUpperCase()}</td><td>${txNames[r.type]}</td>
+      return `<tr data-i="${i}" style="cursor:pointer"><td style="font-family:var(--font-mono);color:var(--text-tertiary)">${r.id.slice(-8).toUpperCase()}</td><td>${txNames[r.type]}</td>
         <td style="color:var(--text-secondary)">${detail}</td>
         <td class="pnl ${up?'up':'down'}">${up?'+':'-'}${usd(abs)}</td>
         <td style="color:var(--text-tertiary)">${new Date(r.createdAt).toLocaleDateString()}</td>
@@ -163,6 +163,13 @@
     }).join('') : '<tr><td colspan="6" style="color:var(--text-tertiary)">No transactions.</td></tr>';
   }
   async function loadTx(){ txItems = (await api('/wallet/ledger?limit=100')).items; renderTx(); }
+  document.getElementById('txBody').addEventListener('click', (e) => {
+    const r = txRows[e.target.closest('tr[data-i]')?.dataset.i]; if (!r) return;
+    const up = BigInt(r.amount) >= 0n;
+    const row = (l, v) => `<div style="display:flex;justify-content:space-between;gap:12px;font-size:13px;padding:8px 0;border-top:1px solid var(--line)"><span style="color:var(--text-tertiary)">${l}</span><strong>${esc(v || '—')}</strong></div>`;
+    $$id('mtTitle').innerHTML = `Receipt<div style="text-align:left;margin-top:14px">${row('Reference', r.id.toUpperCase())}${row('Type', txNames[r.type])}${row('Amount', (up ? '+' : '-') + usd(r.amount.replace('-', '')))}${row('Detail', r.refType)}${row('Date', new Date(r.createdAt).toLocaleString())}${row('Status', 'Completed')}</div>`;
+    $$id('mtBackdrop').classList.add('show');
+  });
   document.querySelectorAll('#panel-transactions .filter-chip').forEach(c => c.addEventListener('click', () => {
     document.querySelectorAll('#panel-transactions .filter-chip').forEach(x => x.classList.remove('active'));
     c.classList.add('active'); txF = c.textContent.trim(); renderTx();
@@ -225,7 +232,7 @@
   }
 
   const pmc = $$id('pmConfirm');
-  pmc.insertAdjacentHTML('beforeend', '<div class="ot-field"><label>Allocation (USD, min $50)</label><div class="ot-input-row"><span>$</span><input type="number" id="pmAlloc" value="500" min="50"></div></div>');
+  pmc.insertAdjacentHTML('beforebegin', '<div class="ot-field"><label>Allocation (USD, min $50)</label><div class="ot-input-row"><span>$</span><input type="number" id="pmAlloc" value="500" min="50"></div></div>');
   const pmn = pmc.cloneNode(true); pmc.replaceWith(pmn);
   pmn.addEventListener('click', async () => {
     if (!picked) return;
