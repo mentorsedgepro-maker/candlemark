@@ -103,7 +103,7 @@
     addresses: async () => {
       const { items } = await A('/deposit-addresses');
       const cur = Object.fromEntries(items.map(i => [i.method, i.details]));
-      const F = { crypto:['btc', 'eth', 'usdtTrc20'], wire:['holder', 'bank', 'accountNumber', 'routing', 'address'], sepa:['bank', 'iban', 'bic', 'address'] };
+      const F = { crypto:['btc', 'eth', 'usdtTrc20', 'sol', 'usdc'], wire:['holder', 'bank', 'accountNumber', 'routing', 'address'], sepa:['bank', 'iban', 'bic', 'address'] };
       view.innerHTML = Object.entries(F).map(([m, fs]) => `<form class="card" data-m="${m}"><h3>${m.toUpperCase()}</h3><div class="g">${fs.map(f => `<div><label>${f}</label><input name="${f}" value="${esc(cur[m]?.[f])}" required></div>`).join('')}</div><button class="b" style="margin-top:12px">Save ${m}</button></form>`).join('');
       view.onclick = null;
       view.onsubmit = (e) => { e.preventDefault(); run(async () => {

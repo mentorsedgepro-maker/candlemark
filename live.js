@@ -185,6 +185,7 @@
   const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;','\'':'&#39;' }[c]));
   const hue = (s) => [...s].reduce((a, c) => a + c.charCodeAt(0), 0) % 360;
   const grad = (h) => `conic-gradient(from 180deg, hsl(${h} 70% 55%), hsl(${h+60} 70% 50%), hsl(${h} 70% 55%))`;
+  const bgOf = (m) => m.avatar ? `url(${esc(m.avatar)}) center/cover` : grad(hue(m.handle));
   const errMsg = { INSUFFICIENT_FUNDS:'Not enough balance.', BELOW_MIN:'Minimum trade is $10.', PRICE_UNAVAILABLE:'This market is closed right now.', KYC_REQUIRED:'Identity verification must be approved first.',
     TIER_LIMIT:'Above your tier withdrawal limit.', TOO_MANY_POSITIONS:'Your tier allows 1 open trade. Close it or upgrade.',
     SELF_COPY:"You can't copy yourself.", VALIDATION:'Please check the details.', NOT_FOUND:'Not found.' };
@@ -250,7 +251,7 @@
     const { items } = await api('/copy');
     $$id('activeCopies').innerHTML = items.length ? items.map(c => `
       <div class="ac-row">
-        <div class="mm-avatar" style="background:${grad(hue(c.handle))}"></div>
+        <div class="mm-avatar" style="background:${bgOf(c)}"></div>
         <div class="ac-info"><strong>${esc(c.name)}</strong><small>@${esc(c.handle)} · ${c.status.toLowerCase()}</small></div>
         <div class="ac-alloc"><strong style="font-family:var(--font-mono)">$${(Number(c.allocation) / 100).toLocaleString()}</strong><span>allocated</span></div>
         <div class="ac-actions">
@@ -258,7 +259,7 @@
           <button class="pill-toggle stop" data-act="stop" data-id="${c.id}">Stop</button>
         </div></div>`).join('') : '<p style="color:var(--text-tertiary)">You are not copying anyone yet.</p>';
     $$id('mentorStrip').innerHTML = items.length ? items.map(c => `
-      <div class="mentor-mini"><div class="mm-head"><div class="mm-avatar" style="background:${grad(hue(c.handle))}"></div>
+      <div class="mentor-mini"><div class="mm-head"><div class="mm-avatar" style="background:${bgOf(c)}"></div>
         <div><strong>${esc(c.name)}</strong><small>@${esc(c.handle)}</small></div></div>
         <div class="mm-stats"><div><strong>$${(Number(c.allocation) / 100).toLocaleString()}</strong><span>your allocation</span></div>
         <div><strong>${c.status.toLowerCase()}</strong><span>status</span></div></div></div>`).join('')
@@ -293,7 +294,7 @@
     const rows = document.querySelectorAll('[data-panel="crypto"] .crypto-row');
     try {
       const c = (await api('/wallet/deposit-methods')).crypto || {};
-      [c.btc, c.eth, c.usdtTrc20].forEach((v, i) => {
+      [c.btc, c.eth, c.usdtTrc20, c.sol, c.usdc].forEach((v, i) => {
         rows[i].querySelector('.mono').textContent = v || 'Address not available yet';
         rows[i].querySelector('.copy-btn').dataset.copy = v || '';
       });
