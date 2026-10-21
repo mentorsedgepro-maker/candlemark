@@ -2,4 +2,4 @@ UPDATE "User" SET role = 'ADMIN' WHERE email = 'their@email.com';
 
 UPDATE "User" SET role = 'USER' WHERE email = 'their@email.com';
 
-
+postgresql://postgres.ovfnhcvnwlvbmxtwytgq:MR-P7zCf%2Ci%5EB%40As@aws-0-eu-west-1.pooler.supabase.com:5432/postgres
