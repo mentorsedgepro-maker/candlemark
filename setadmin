@@ -3,4 +3,3 @@ UPDATE "User" SET role = 'ADMIN' WHERE email = 'their@email.com';
 UPDATE "User" SET role = 'USER' WHERE email = 'their@email.com';
 
 
-when i click on copy mentors it does not deduct the amount for copying the mentor from the balance, it should the copying fee from the balanace and then trade with the alocated amount if the balance is up to it.

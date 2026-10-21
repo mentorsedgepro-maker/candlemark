@@ -6,7 +6,12 @@
   sel.className = 'lang-sel notranslate'; sel.setAttribute('aria-label', 'Language');
   sel.innerHTML = Object.entries(L).map(([k, v]) => `<option value="${k}"${k === cur ? ' selected' : ''}>${v}</option>`).join('');
   sel.onchange = () => {
-    document.cookie = sel.value === 'en' ? 'googtrans=;path=/;max-age=0' : `googtrans=/en/${sel.value};path=/`;
+    const h = location.hostname, p = h.split('.');
+    const doms = ['', `;domain=${h}`, `;domain=.${h}`, `;domain=.${p.slice(-2).join('.')}`];
+    doms.forEach((d) => {
+      document.cookie = `googtrans=;path=/;max-age=0${d}`;
+      if (sel.value !== 'en') document.cookie = `googtrans=/en/${sel.value};path=/${d}`;
+    });
     location.reload();
   };
   const host = document.querySelector('.nav-actions,.topbar-right');
