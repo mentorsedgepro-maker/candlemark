@@ -400,7 +400,7 @@
 
   // ---------- stat cards, hero total, allocation ----------
   async function loadStats(){
-    const [bal, open, closed] = await Promise.all([api('/wallet/balance?acct=trading'), api('/trades?status=OPEN'), api('/trades?status=CLOSED')]);
+    const [bal, open, closed, mir] = await Promise.all([api('/wallet/balance?acct=trading'), api('/trades?status=OPEN'), api('/trades?status=CLOSED'), api('/wallet/pnl-today')]);
     const cash = Number(bal.available) / 100;
     let invested = 0, unreal = 0; const by = { forex:0, stocks:0, crypto:0, other:0 };
     open.items.forEach(p => {
@@ -411,7 +411,7 @@
     const today = new Date().toDateString();
     const realized = closed.items.filter(p => p.closedAt && new Date(p.closedAt).toDateString() === today)
       .reduce((t, p) => t + Number(p.pnl ?? 0) / 100, 0);
-    const pnl = unreal + realized, equity = cash + invested + unreal;
+    const pnl = unreal + realized + Number(mir.amount) / 100, equity = cash + invested + unreal;
     const fmt = (n) => (n < 0 ? '-' : '+') + usd(Math.round(Math.abs(n) * 100));
 
     $$id('totalBalance').textContent = usd(Math.round(equity * 100));
