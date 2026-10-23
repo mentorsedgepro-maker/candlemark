@@ -66,12 +66,15 @@ const RISK = '<p class="tl-risk"><strong>Risk warning:</strong> Trading leverage
 const CTA = '<div class="tl-cta"><a href="register.html" class="btn-solid"><span>Create an account</span></a><a href="mentorboard.html" class="btn-outline"><span>Browse mentors</span></a></div>';
 const root = document.getElementById('tl');
 const key = new URLSearchParams(location.search).get('p');
-const tabs = (k) => `<div class="tl-tabs">${Object.entries(T).map(([x, v]) => `<a href="tools.html?p=${x}" class="${x === k ? 'on' : ''}">${esc(v[0])}</a>`).join('')}</div>`;
+const toolHref = (k) => k === 'signals' ? 'signal-centre.html' : `tools.html?p=${k}`;
+const tabs = (k) => `<div class="tl-tabs">${Object.entries(T).map(([x, v]) => `<a href="${toolHref(x)}" class="${x === k ? 'on' : ''}">${esc(v[0])}</a>`).join('')}</div>`;
 
-if (!T[key]) {
+if (key === 'signals') {
+  location.replace('signal-centre.html');
+} else if (!T[key]) {
   document.title = 'Tools — mentorsedgepro';
   root.innerHTML = `<span class="eyebrow">Tools</span><h1>Tools for people who check their work</h1><p class="lead">What is live and what is still on the way is marked on each page.</p>
-    <div class="tool-grid">${Object.entries(T).map(([k, v]) => `<a class="tool-card" href="tools.html?p=${k}"><h3>${esc(v[0])}</h3><p>${esc(v[1])}</p><p style="margin-top:10px;font:12px var(--font-mono);color:${LIVE.includes(k) ? 'var(--brand)' : 'var(--gold)'}">${LIVE.includes(k) ? 'Live' : 'Coming soon'}</p></a>`).join('')}</div>${RISK}`;
+    <div class="tool-grid">${Object.entries(T).map(([k, v]) => `<a class="tool-card" href="${toolHref(k)}"><h3>${esc(v[0])}</h3><p>${esc(v[1])}</p><p style="margin-top:10px;font:12px var(--font-mono);color:${LIVE.includes(k) ? 'var(--brand)' : 'var(--gold)'}">${LIVE.includes(k) ? 'Live' : 'Coming soon'}</p></a>`).join('')}</div>${RISK}`;
 } else if (key === 'calendar') {
   document.title = 'Economic Calendar — mentorsedgepro';
   root.innerHTML = `<span class="eyebrow">Tools</span><h1>${T.calendar[0]}</h1><p class="lead">${T.calendar[1]} Times are shown in your local time zone.</p>${tabs(key)}
@@ -127,12 +130,6 @@ if (!T[key]) {
   g('gBuy').onclick = () => open(1); g('gSell').onclick = () => open(-1);
   g('gClose').onclick = () => { if (pos) { real += pos.s * (C[i].c - pos.e) / pos.e * 100; pos = null; paint(); } };
   load();
-} else if (key === 'signals') {
-  document.title = 'Signal Centre — mentorsedgepro';
-  root.innerHTML = `<span class="eyebrow">Tools</span><h1>${T.signals[0]}</h1><p class="lead">Trade ideas published by our team. They are not personal advice and any idea can lose money.</p>${tabs(key)}<div class="tl-card" id="sg"><p style="padding:20px;color:var(--text-tertiary)">Loading…</p></div>${CTA}${RISK}`;
-  fetch(API_BASE + '/signals').then((r) => r.json()).then(({ items }) => {
-    document.getElementById('sg').innerHTML = items.length ? `<table><thead><tr><th>Date</th><th>Market</th><th>Side</th><th>Entry</th><th>SL</th><th>TP</th><th>Status</th><th>Rationale</th></tr></thead><tbody>${items.map((s) => `<tr><td class="m">${new Date(s.createdAt).toLocaleDateString()}</td><td><strong>${esc(s.symbol)}</strong></td><td>${esc(s.side)}</td><td class="m">${Number(s.entry)}</td><td class="m">${Number(s.stopLoss)}</td><td class="m">${Number(s.takeProfit)}</td><td><span class="imp ${s.status === 'HIT_TP' ? 'Low' : s.status === 'HIT_SL' ? 'High' : 'Medium'}">${esc(s.status.replace('_', ' '))}</span></td><td>${esc(s.rationale)}<br><small style="color:var(--text-tertiary)">${esc(s.source)}</small></td></tr>`).join('')}</tbody></table>` : '<p style="padding:20px;color:var(--text-tertiary)">No signals published yet.</p>';
-  }).catch(() => { document.getElementById('sg').innerHTML = '<p style="padding:20px;color:var(--text-tertiary)">Signals unavailable right now.</p>'; });
 } else {
   const [title, lead] = T[key];
   document.title = title + ' — mentorsedgepro';

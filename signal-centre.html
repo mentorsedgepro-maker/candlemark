@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Signal Centre — MentorsEdgePro</title>
+<meta name="description" content="Review trading ideas published by the MentorsEdgePro team.">
+<link rel="canonical" href="https://mentorsedgepro.co/signal-centre.html">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#2272E6">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<script src="theme.js"></script>
+<style>
+.signals-main{max-width:var(--container);margin:0 auto;padding:132px 24px 72px;min-height:60vh}
+.signals-main h1{font-size:clamp(2rem,4vw,2.8rem);margin:8px 0 12px}
+.signals-lead{max-width:720px;color:var(--text-secondary);margin-bottom:28px}
+.signals-intro{max-width:860px;color:var(--text-secondary);font-size:1.05rem;margin:0 0 40px}
+.signals-section{margin:48px 0}
+.signals-section h2{font-size:clamp(1.5rem,3vw,2rem);margin:0 0 12px}
+.signals-section>p{max-width:800px;color:var(--text-secondary);margin:0 0 22px}
+.signals-benefits{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin-top:24px}
+.signals-benefit,.signals-market{background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:20px;box-shadow:var(--shadow-sm)}
+.signals-benefit h3{font-size:1.05rem;margin:0 0 8px}
+.signals-benefit p{font-size:.92rem;color:var(--text-secondary)}
+.signals-markets{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin-top:22px}
+.signals-market{display:block;font-weight:600;transition:border-color .2s,transform .2s}
+.signals-market:hover{border-color:var(--brand-200);transform:translateY(-2px)}
+.signals-market span{display:block;color:var(--text-tertiary);font:11px var(--font-mono);margin-top:5px}
+.signals-card{overflow-x:auto;background:var(--bg-panel);border:1px solid var(--line);border-radius:var(--radius-m);padding:8px 20px;box-shadow:var(--shadow-sm)}
+.signals-card table{width:100%;min-width:780px;border-collapse:collapse}
+.signals-card th{text-align:left;font:500 10.5px var(--font-mono);text-transform:uppercase;color:var(--text-tertiary);padding:14px 8px 10px}
+.signals-card td{padding:12px 8px;border-top:1px solid var(--line);font-size:13.5px;vertical-align:top}
+.signals-card td.numeric{font-family:var(--font-mono);color:var(--text-secondary);white-space:nowrap}
+.signal-status{display:inline-block;font:600 10.5px var(--font-mono);padding:3px 9px;border-radius:100px;white-space:nowrap}
+.signal-status.open{color:var(--gold);background:var(--gold-dim)}
+.signal-status.target{color:var(--bull);background:var(--bull-dim)}
+.signal-status.stop{color:var(--bear);background:var(--bear-dim)}
+.signals-message{padding:22px;color:var(--text-secondary)}
+.signals-source{color:var(--text-tertiary);font-size:12px}
+.signals-cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.signals-risk{color:var(--text-tertiary);font-size:.78rem;line-height:1.7;margin-top:28px;max-width:900px}
+@media(max-width:900px){.signals-benefits{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.signals-main{padding:112px 16px 52px}.signals-card{padding:4px 12px}.signals-benefits{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="nav scrolled" id="siteNav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand" aria-label="MentorsEdgePro home">
+      <span class="brand-mark" aria-hidden="true">
+        <svg width="26" height="26" viewBox="0 0 26 26" fill="none">
+          <rect x="4" y="10" width="4" height="12" rx="1" fill="#2272E6"/>
+          <rect x="4" y="6" width="4" height="2.5" fill="#2272E6"/>
+          <rect x="11" y="4" width="4" height="18" rx="1" fill="#8CC0FF"/>
+          <rect x="11" y="2" width="4" height="1.6" fill="#8CC0FF"/>
+          <rect x="18" y="13" width="4" height="9" rx="1" fill="#14378C"/>
+          <rect x="18" y="17.5" width="4" height="2" fill="#14378C"/>
+        </svg>
+      </span>
+      <span class="brand-word">Mentorsedge<em>Pro</em></span>
+    </a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="markets.html" class="nav-link nav-link-simple">Markets</a>
+      <a href="mentorboard.html" class="nav-link nav-link-simple">Copytrading</a>
+      <a href="tools.html" class="nav-link nav-link-simple" aria-current="page">Tools</a>
+      <a href="company.html?p=about" class="nav-link nav-link-simple">About</a>
+      <a href="support.html" class="nav-link nav-link-simple">Support</a>
+    </nav>
+    <div class="nav-actions">
+      <a href="login.html" class="btn-ghost">Log in</a>
+      <a href="register.html" class="btn-solid"><span>Get Started</span></a>
+      <button class="nav-burger" id="navBurger" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobileMenu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+<div class="menu-backdrop" id="menuBackdrop" aria-hidden="true"></div>
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile">
+  <a href="markets.html">Markets</a>
+  <a href="mentorboard.html">Copytrading</a>
+  <a href="tools.html" aria-current="page">Tools</a>
+  <a href="company.html?p=about">About</a>
+  <a href="support.html">Support</a>
+  <a href="login.html" class="mm-ghost">Log in</a>
+  <a href="register.html" class="mm-solid">Get Started</a>
+</nav>
+
+<main class="signals-main">
+  <span class="eyebrow">Tools</span>
+  <h1>Signal Centre</h1>
+  <p class="signals-lead">Receive up to 50 daily human and AI-based trading signals straight to your trading platform. With precise entry, target and stop levels, they’re ideal for those seeking hassle-free trading.</p>
+  <p class="signals-intro">Signal Centre* is an FCA-regulated analytics tool that can be accessed on MentorsEdgePro, MT4/5 and the MentorsEdgePro Portal. It provides up to 50 daily trading signals across multiple markets such as forex, indices, commodities, stocks and cryptocurrencies.</p>
+  <div class="signals-cta">
+    <a href="login.html" class="btn-solid"><span>Access Signal Centre</span></a>
+  </div>
+
+  <section class="signals-section">
+    <h2>What is Signal Centre?</h2>
+    <p>Signal Centre provides research and trading signals to help you assess potential opportunities. Review each idea carefully: signals are not personal advice, and trading decisions remain your responsibility.</p>
+    <div class="signals-benefits">
+      <article class="signals-benefit">
+        <h3>Customise your information</h3>
+        <p>Filter trading signals by market and confidence level to match your trading style.</p>
+      </article>
+      <article class="signals-benefit">
+        <h3>Simplify trading decisions</h3>
+        <p>Eliminate the guesswork of when to buy or sell, potentially saving valuable time and research.</p>
+      </article>
+      <article class="signals-benefit">
+        <h3>Stay a step ahead</h3>
+        <p>Analyse up to 50 trading signals before the market opens, with updates every hour.</p>
+      </article>
+      <article class="signals-benefit">
+        <h3>Receive detailed cues</h3>
+        <p>Make use of the detailed trading plan every signal offers, including precise entry and exit points.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="signals-section">
+    <h2>Trade across 4,000 instruments</h2>
+    <p>Assess your trading tactics and analysis on a diverse range of global markets.</p>
+    <div class="signals-markets">
+      <a class="signals-market" href="markets.html?m=forex">Forex<span>Currency pairs</span></a>
+      <a class="signals-market" href="markets.html?m=commodities">Commodities<span>Metals and energy</span></a>
+      <a class="signals-market" href="markets.html?m=crypto">Crypto<span>Digital assets</span></a>
+      <a class="signals-market" href="markets.html?m=indices">Indices<span>Global indices</span></a>
+      <a class="signals-market" href="markets.html?m=stocks">Stocks<span>Company shares</span></a>
+    </div>
+  </section>
+
+  <section class="signals-section">
+    <h2>Latest trading signals</h2>
+    <p>Trade ideas published by our team. They are not personal advice, and any idea can lose money.</p>
+  </section>
+  <div class="signals-card" id="signals" aria-live="polite">
+    <p class="signals-message" role="status">Loading signals…</p>
+  </div>
+  <div class="signals-cta">
+    <a href="register.html" class="btn-solid"><span>Create an account</span></a>
+    <a href="mentorboard.html" class="btn-outline"><span>Browse mentors</span></a>
+  </div>
+  <p class="signals-risk"><strong>Risk warning:</strong> Trading leveraged products carries a high risk of loss. Information here is general, not investment advice. Prices and account information may be delayed, incomplete, or unverified as live.</p>
+</main>
+
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="index.html" class="brand-word">mentorsedge<em>Pro</em></a>
+      <p>Multi-asset trading and mentor-led copytrading, on one platform.</p>
+    </div>
+    <div class="footer-col">
+      <h5>Trade</h5>
+      <a href="markets.html?m=forex">Forex</a>
+      <a href="markets.html?m=stocks">Stocks</a>
+      <a href="markets.html?m=crypto">Crypto</a>
+      <a href="markets.html?m=indices">Indices</a>
+    </div>
+    <div class="footer-col">
+      <h5>Platform</h5>
+      <a href="mentorboard.html">Mentorboard</a>
+      <a href="tools.html">Trading tools</a>
+      <a href="signal-centre.html" aria-current="page">Signal Centre</a>
+      <a href="tools.html?p=gym">Trader's Gym</a>
+    </div>
+    <div class="footer-col">
+      <h5>Company</h5>
+      <a href="company.html?p=about">About</a>
+      <a href="regulation.html">Regulation &amp; Security</a>
+      <a href="support.html">Support</a>
+    </div>
+    <div class="footer-col">
+      <h5>Legal</h5>
+      <a href="legal.html?p=terms">Terms &amp; conditions</a>
+      <a href="legal.html?p=privacy">Privacy policy</a>
+      <a href="legal.html?p=aml">AML policy</a>
+    </div>
+  </div>
+  <div class="footer-bottom"><span>© 2026 mentorsedgepro</span></div>
+</footer>
+
+<script src="config.js"></script>
+<script>
+const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
+}[char]));
+
+const renderSignals = (items) => {
+  if (!items.length) {
+    return '<p class="signals-message">No signals published yet.</p>';
+  }
+
+  return `<table>
+    <thead><tr><th>Date</th><th>Market</th><th>Side</th><th>Entry</th><th>SL</th><th>TP</th><th>Status</th><th>Rationale</th></tr></thead>
+    <tbody>${items.map((signal) => {
+      const date = new Date(signal.createdAt);
+      const dateLabel = Number.isNaN(date.getTime()) ? '—' : date.toLocaleDateString();
+      const statusClass = signal.status === 'HIT_TP' ? 'target' : signal.status === 'HIT_SL' ? 'stop' : 'open';
+      const statusLabel = String(signal.status ?? 'Open').replace(/_/g, ' ');
+      return `<tr>
+        <td class="numeric">${dateLabel}</td>
+        <td><strong>${escapeHtml(signal.symbol)}</strong></td>
+        <td>${escapeHtml(signal.side)}</td>
+        <td class="numeric">${escapeHtml(signal.entry)}</td>
+        <td class="numeric">${escapeHtml(signal.stopLoss)}</td>
+        <td class="numeric">${escapeHtml(signal.takeProfit)}</td>
+        <td><span class="signal-status ${statusClass}">${escapeHtml(statusLabel)}</span></td>
+        <td>${escapeHtml(signal.rationale)}<br><small class="signals-source">${escapeHtml(signal.source)}</small></td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table>`;
+};
+
+const signalsContainer = document.getElementById('signals');
+fetch(`${API_BASE}/signals`)
+  .then((response) => {
+    if (!response.ok) throw new Error('Signal request failed');
+    return response.json();
+  })
+  .then((data) => {
+    if (!Array.isArray(data.items)) throw new Error('Invalid signal response');
+    signalsContainer.innerHTML = renderSignals(data.items);
+  })
+  .catch(() => {
+    signalsContainer.innerHTML = '<p class="signals-message" role="status">Signals unavailable right now.</p>';
+  });
+
+const menuButton = document.getElementById('navBurger');
+const mobileMenu = document.getElementById('mobileMenu');
+const menuBackdrop = document.getElementById('menuBackdrop');
+const closeMenu = () => {
+  mobileMenu.classList.remove('open');
+  menuBackdrop.classList.remove('show');
+  menuButton.classList.remove('active');
+  menuButton.setAttribute('aria-expanded', 'false');
+  document.body.classList.remove('no-scroll');
+};
+menuButton.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  menuBackdrop.classList.toggle('show', isOpen);
+  menuButton.classList.toggle('active', isOpen);
+  menuButton.setAttribute('aria-expanded', String(isOpen));
+  document.body.classList.toggle('no-scroll', isOpen);
+});
+menuBackdrop.addEventListener('click', closeMenu);
+mobileMenu.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+document.addEventListener('keydown', (event) => {
+  if (event.key === 'Escape') closeMenu();
+});
+window.addEventListener('resize', () => {
+  if (window.innerWidth > 920) closeMenu();
+});
+</script>
+</body>
+</html>
