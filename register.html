@@ -129,6 +129,10 @@
             <div class="field-error" id="termsError" style="display:none; margin-left:28px;"><span>You need to accept the terms to continue</span></div>
           </div>
 
+          <div class="cf-turnstile" data-sitekey="0x4AAAAAAGOpD71BWtar9zIj"></div>
+          <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true"
+                 style="position:absolute;left:-9999px;opacity:0">
+
           <button type="submit" class="btn-solid btn-submit magnetic">
             <span>Create Account</span>
             <div class="spinner"></div>
@@ -168,5 +172,6 @@
   });
 </script>
 <script src="i18n.js"></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
 </html>

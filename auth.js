@@ -231,15 +231,23 @@ if(registerForm){
     const btn = registerForm.querySelector('.btn-submit');
     btn.classList.add('loading'); btn.disabled = true;
     const addr = email.value.trim().toLowerCase();
+    const captcha = registerForm.querySelector('[name="cf-turnstile-response"]')?.value;
+    const website = registerForm.querySelector('[name="website"]').value;
     try{
       await api('/auth/register', { method:'POST', auth:false, body:{
         name: name.value.trim(), email: addr, password: pw.value,
         country: document.getElementById('regCountry').value || undefined,
+        captcha, website,
       }});
       openOtp(addr, 'kyc.html');
     }catch(err){
       const c = err.data?.error;
-      if(c === 'EMAIL_TAKEN') setInvalid(email.closest('.field'), 'Email already registered. Log in instead.');
+      if(c === 'CAPTCHA_FAILED'){
+        setInvalid(email.closest('.field'), 'Please complete the verification and try again');
+        turnstile.reset();
+      }
+      else if(c === 'EMAIL_DOMAIN_NOT_ALLOWED') setInvalid(email.closest('.field'), 'Please use a permanent email address');
+      else if(c === 'TRY_AGAIN_LATER') setInvalid(email.closest('.field'), 'Please try again later');
       else if(c === 'VALIDATION') setInvalid(pw.closest('.field'), 'Please check your details');
       else if(err.status === 429) setInvalid(email.closest('.field'), 'Too many attempts, wait a minute');
       else setInvalid(email.closest('.field'), 'Server unreachable, try again');
